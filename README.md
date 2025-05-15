@@ -1,4 +1,3 @@
-
 # OmniChain Messenger - LayerZero V2 on Solana
 
 A cross-chain messaging and asset transfer application built using LayerZero V2, enabling seamless communication between Solana and EVM chains.
