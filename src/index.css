@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 17% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 17% 15%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 17% 15%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 262 60% 15%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 240 30% 25%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 240 17% 20%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 326 73% 60%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 17% 25%;
+    --input: 240 17% 25%;
+    --ring: 256 60% 60%;
+
+    --radius: 0.5rem;
+
+    font-family: 'Inter', 'Segoe UI', 'Arial', sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-space-midnight text-foreground;
+    font-family: 'Inter', 'Segoe UI', 'Arial', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    background: linear-gradient(135deg, #0F1729 0%, #1A1040 100%);
+    min-height: 100vh;
+  }
+}
+
+.network-node {
+  position: relative;
+}
+
+.network-node::before {
+  content: '';
+  position: absolute;
+  inset: -4px; /* slightly reduced from -5px for sleeker look */
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--node-color-1, theme('colors.space.cosmic-teal')), 
+    var(--node-color-2, theme('colors.space.nebula-pink')), 
+    var(--node-color-1, theme('colors.space.cosmic-teal'))
+  );
+  opacity: 0.8; /* slightly reduced opacity for subtlety */
+  animation: rotate 5s linear infinite; /* slowed down for elegance */
+  filter: blur(6px); /* reduced blur for sharper edges */
+  z-index: -1;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.message-particle {
+  position: absolute;
+  width: 4px; /* reduced from 6px for minimalism */
+  height: 4px; /* reduced from 6px for minimalism */
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor; /* subtle glow */
+}
+
+/* Updated animations for smoother transitions */
+@keyframes message-travel-sleek {
+  0% { 
+    transform: translateX(0) translateY(0) scale(0.8);
+    opacity: 0;
+  }
+  20% { 
+    transform: translateX(var(--travel-distance-x, 200px) * 0.2) 
+              translateY(var(--travel-distance-y, -100px) * 0.2) 
+              scale(1);
+    opacity: 0.8;
+  }
+  80% { opacity: 0.8; }
+  100% { 
+    transform: translateX(var(--travel-distance-x, 200px)) 
+              translateY(var(--travel-distance-y, -100px))
+              scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in-subtle {
+  0% { opacity: 0; transform: translateY(5px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { filter: drop-shadow(0 0 4px currentColor); }
+  50% { filter: drop-shadow(0 0 8px currentColor); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Enhanced backdrop blur for modals */
+.modal-backdrop {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Minimalistic card and border tweaks */
+.bg-card, .bg-background, .bg-popover {
+  box-shadow: none !important;
+  border-width: 1px !important;
+  border-color: hsl(var(--border)) !important;
+  background: rgba(20,22,34,0.85) !important;
+}
+
+.shadow-lg, .shadow-sm, .shadow {
+  box-shadow: none !important;
+}
+
+/* Minimal button style */
+button, .btn, .Button, .shadcn-btn {
+  border-radius: 0.5rem !important;
+  box-shadow: none !important;
+  border-width: 1px;
+  border-color: hsl(var(--border));
+  background: transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+button:hover, .btn:hover, .Button:hover, .shadcn-btn:hover {
+  background: hsl(var(--muted));
+  color: hsl(var(--accent-foreground));
+  border-color: hsl(var(--accent));
+}
+
+input, textarea, select {
+  border-radius: 0.375rem !important;
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background: rgba(20,22,34,0.7);
+  color: inherit;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: hsl(var(--accent));
+  outline: none;
+  background: rgba(20,22,34,0.9);
+}
+
+::-webkit-input-placeholder, ::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: 1;
+}
+
+.card, .rounded-lg, .rounded-md {
+  border-radius: 1rem !important;
+}
+
+@media (max-width: 640px) {
+  .container, .max-w-5xl, .max-w-4xl {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+}
